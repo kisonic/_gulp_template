@@ -1,0 +1,50 @@
+src:
+  path: "../src"
+
+  styles:
+    all: "../src/styles/*.styl"
+    path: "../src/styles"
+
+  scripts:
+    local:
+      all: "../src/scripts/local/**/*.coffee"
+    vendor:
+      all: "../src/scripts/vendor/**/*.*"
+
+  images:
+    all: "../src/images/**/*.*"
+    path: "../src/images"
+
+  fonts:
+    all: "../src/fonts/**/*.*"
+    path: "../src/fonts"
+
+  templates:
+    all: "../src/*.jade"
+    path: "../src"
+
+built:
+  path: "../built"
+
+  styles:
+    all: "../built/styles/*.css"
+    path: "../built/styles"
+    main: "../built/*.css"
+
+  scripts:
+    all: "../built/scripts/**/*.js"
+    path: "../built/scripts"
+    local:
+      all: "../built/scripts/local/**/*.js"
+      path: "../built/scripts/local"
+    vendor:
+      all: "../built/scripts/vendor/**/*.js"
+      path: "../built/scripts/vendor"
+
+  images:
+    all: "../built/images/**/*.*"
+    path: "../built/images"
+
+  fonts:
+    all: "../built/fonts/**/*.*"
+    path: "../built/fonts"

@@ -1,0 +1,29 @@
+{
+  "name": "bitrix",
+  "version": "1.0.0",
+  "description": "bitrix template",
+  "main": "gulpfile.js",
+  "dependencies": {},
+  "devDependencies": {
+    "gulp": "latest",
+    "gulp-autoprefixer": "latest",
+    "gulp-coffee": "latest",
+    "gulp-connect": "latest",
+    "gulp-csscomb": "^3.0.3",
+    "gulp-imagemin": "latest",
+    "gulp-jade": "latest",
+    "gulp-load-plugins": "latest",
+    "gulp-minify-css": "latest",
+    "gulp-plumber": "latest",
+    "gulp-stylus": "latest",
+    "gulp-uglify": "latest",
+    "gulp-util": "latest",
+    "imagemin-pngcrush": "latest",
+    "js-yaml": "latest"
+  },
+  "scripts": {
+    "test": "gulp"
+  },
+  "author": "kisonic",
+  "license": "ISC"
+}

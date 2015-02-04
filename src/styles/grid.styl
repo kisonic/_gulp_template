@@ -1,0 +1,87 @@
+columns = 12
+gutter = 15px
+width_narrow = 768px
+width_middle = 1000px
+width_wide = 1200px
+
+.container
+	box-sizing border-box
+	margin-right auto
+	margin-left auto
+	padding-right gutter
+	padding-left gutter
+
+.row
+	margin-right - gutter
+	margin-left - gutter
+
+generate_grid_classes(columns, suffix)
+	$column_{columns}
+		position relative
+		box-sizing border-box
+		min-height 1px
+		padding-right 15px
+		padding-left 15px
+	for x in suffix
+		for y in columns..1
+			.col{x}_{y}
+				@extend $column_{columns}
+
+generate_grid_float(columns, suffix)
+	$float_{suffix}_{columns}
+		float left
+	for x in columns..1
+		.col{suffix}_{x}
+			@extend $float_{suffix}_{columns}
+
+generate_grid(columns, suffix)
+	for x in columns..1
+		total = 100 / columns * x
+		.col{suffix}_{x}
+			width total+'%'
+
+generate_grid_offset(columns, suffix)
+	for x in columns..1
+		total = 100 / columns * x
+		.col{suffix}_offset_{x}
+			margin-left total+'%'
+
+generate_grid_classes(columns, '_xs' '_sm' '_md' '_lg')
+
+generate_grid_float(columns, '_xs')
+
+generate_grid(columns, '_xs')
+
+generate_grid_offset(columns, '_xs')
+
+@media (min-width: width_narrow)
+	.container
+		width width_narrow
+	generate_grid_float(columns, '_sm')
+	generate_grid(columns, '_sm')
+	generate_grid_offset(columns, '_sm')
+
+@media (min-width: width_middle)
+	.container
+		width width_middle
+	generate_grid_float(columns, '_md')
+	generate_grid(columns, '_md')
+	generate_grid_offset(columns, '_md')
+
+@media (min-width: width_wide)
+	.container
+		width width_wide
+	generate_grid_float(columns, '_lg')
+	generate_grid(columns, '_lg')
+	generate_grid_offset(columns, '_lg')
+
+.container:before,
+.container:after,
+.row:before,
+.row:after
+	content " "
+	display table
+
+.container:after,
+.row:after
+	clear both

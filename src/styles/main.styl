@@ -1,0 +1,549 @@
+color_main = #21242c
+color_main_light = #2c2f38
+color_main_dark = #191a22
+color_text = #fff
+color_text_dark = #747883
+color_second = #0fa5da
+gutter = 15px
+font_main = 'PT Sans Caption', Tahoma, Arial, Helvetica, sans-serif
+font_header = 'Ubuntu', Tahoma, Arial, Helvetica, sans-serif
+font_italic = Georgea, serif
+
+body
+	font-size 0.875em
+	color #000
+	font-family font_main
+
+h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6
+	text-transform uppercase
+	font-family font_header
+	font-weight bold
+	margin 1em 0 .5em
+	line-height 1
+
+h1, .h1
+	font-size 3em
+	letter-spacing -1px
+h2, .h2
+	font-size 2.6em
+h3, .h3
+	font-size 2.2em
+h4, .h4
+	font-size 1.8em
+h5, .h5
+	font-size 1.4em
+h6, .h6
+	font-weight normal
+
+.center_header
+	position relative
+	text-align center
+	margin 2em 0 1em
+	z-index 1
+	span
+		background-color color_main
+		padding 0 .5em
+	&:after
+		content ''
+		position absolute
+		border 0
+		top 0
+		bottom 0
+		left 0
+		margin auto
+		height 6px
+		width 100%
+		background-color alpha(color_text, 0.05)
+		z-index -1
+
+a
+	color color_second
+	text-decoration underline
+	&:hover
+		color lightness(color_second, 60%)
+
+p
+	line-height 1.5
+	margin-bottom .5em
+.lead
+	margin 1em 0
+.lead_s
+	margin .5em 0
+
+em, i, dfn
+	font-family font_italic
+	font-weight bold
+
+html
+	background-color color_main_dark
+
+body
+	background-color color_main
+	color color_text
+
+.main_wrap
+	margin 0 auto
+
+.main_wrap input[type='text'],
+.main_wrap input[type='date'],
+.main_wrap input[type='datetime'],
+.main_wrap input[type='datetime-local'],
+.main_wrap input[type='time'],
+.main_wrap input[type='month'],
+.main_wrap input[type='week'],
+.main_wrap input[type='password'],
+.main_wrap input[type='search'],
+.main_wrap input[type='email'],
+.main_wrap input[type='url'],
+.main_wrap input[type='tel'],
+.main_wrap input[type='number'],
+.main_wrap textarea,
+.main_wrap select,
+.main_wrap input[type='button'],
+.main_wrap input[type='reset'],
+.main_wrap input[type='submit'],
+.main_wrap button,
+.main_wrap .button
+	-webkit-font-smoothing antialiased
+	-moz-osx-font-smoothing grayscale
+	font inherit
+	display inline-block
+	box-sizing border-box
+	max-width 100%
+	margin-bottom gutter*2
+	padding 1em
+	border none
+	border-radius .3em
+	outline none
+	box-shadow none
+
+.main_wrap input[type='text'],
+.main_wrap input[type='date'],
+.main_wrap input[type='datetime'],
+.main_wrap input[type='datetime-local'],
+.main_wrap input[type='time'],
+.main_wrap input[type='month'],
+.main_wrap input[type='week'],
+.main_wrap input[type='password'],
+.main_wrap input[type='search'],
+.main_wrap input[type='email'],
+.main_wrap input[type='url'],
+.main_wrap input[type='tel'],
+.main_wrap input[type='number'],
+.main_wrap textarea,
+.main_wrap select
+	color color_text_dark
+	background-color color_main_light
+
+.main_wrap textarea
+	border-bottom-right-radius 0
+
+.main_wrap input[type='date'],
+.main_wrap input[type='datetime'],
+.main_wrap input[type='datetime-local'],
+.main_wrap input[type='time'],
+.main_wrap input[type='month'],
+.main_wrap input[type='week'],
+.main_wrap input[type='number']
+	padding-right 0
+
+.main_wrap select
+	-webkit-appearance none
+	-moz-appearance none
+
+.main_wrap button::-moz-focus-inner,
+.main_wrap input[type="reset"]::-moz-focus-inner,
+.main_wrap input[type="button"]::-moz-focus-inner,
+.main_wrap input[type="submit"]::-moz-focus-inner
+	border none
+	padding 0
+
+.main_wrap input[type='button'],
+.main_wrap input[type='reset'],
+.main_wrap input[type='submit'],
+.main_wrap button,
+.main_wrap .button
+	color color_text
+	background-color color_second
+
+.main_header
+	position fixed
+	top 0
+	width 100%
+	z-index 100
+	background-color color_main_dark
+
+.main_menu
+	ul
+		float right
+	li
+		display block
+		float left
+		padding-left 2em
+		&:first-child
+			padding-left 0
+		a
+			font-family font_header
+			font-weight bold
+			color color_text
+			display inline-block
+			padding 1em 0 .7em
+			border-bottom .3em solid transparent
+			text-transform uppercase
+			text-decoration none
+			&:hover
+				color lightness(color_second, 60%)
+			&.current
+				border-bottom-color color_text
+				&:hover
+					border-bottom-color color_second
+
+.logo
+	padding-top 1em
+
+.fullscreen_slide_content
+	position absolute
+	bottom 0
+	left 0
+	right 0
+	margin 0 auto
+	width 400px
+	text-align center
+	padding-bottom 2em
+
+.person
+	position relative
+	text-align center
+	overflow hidden
+	word-wrap break-word
+	margin-bottom gutter * 2
+.person_content
+	position relative
+	left 0%
+	transition left .3s ease
+.show_person_more_info .person_content
+	left 100%
+.person_info
+	background-color color_main_light
+.person_info_img
+	display block
+	text-decoration none
+	img
+		display block
+		width 100%
+.person_info_content
+	padding 2em 1em 1em
+	min-height 12.5em
+	box-sizing border-box
+.person_more_info
+	position absolute
+	top 0
+	right 100%
+	width 100%
+	height 100%
+	padding 2em 1em
+	box-sizing border-box
+	background-color color_second
+
+.main_footer
+
+.fullscreen_slider img
+	max-width none
+	max-height none
+
+.color_main
+	color color_main
+.color_main_light
+	color color_main_light
+.color_main_dark
+	color color_main_dark
+.color_text
+	color color_text
+.color_text_dark
+	color color_text_dark
+.color_second
+	color color_second
+
+.bg_color_main
+	background-color color_main
+.bg_color_main_light
+	background-color color_main_light
+.bg_color_main_dark
+	background-color color_main_dark
+.bg_color_text
+	background-color color_text
+.bg_color_text_dark
+	background-color color_text_dark
+.bg_color_second
+	background-color color_second
+
+hr
+	border 0
+	margin 2em auto
+	height 1px
+	width 100%
+	background-color color_text
+.hr_dark
+	background-color color_text_dark
+.hr_xs
+	margin 1em auto
+	width 4em
+.hr_s
+	width 6em
+.hr_l
+	height 2px
+.hr_xl
+	margin 3em auto
+	height 4px
+.hr_xxl
+	margin 4em auto
+	height 6px
+
+.xxxxsmall
+	font-size 0.5em
+.xxxsmall
+	font-size 0.6em
+.xxsmall
+	font-size 0.7em
+.xsmall
+	font-size 0.8em
+.small
+	font-size 0.9em
+.big
+	font-size 1.1em
+.xbig
+	font-size 1.2em
+.xxbig
+	font-size 1.3em
+.xxxbig
+	font-size 1.4em
+.xxxxbig
+	font-size 1.5em
+.bigx2
+	font-size 2em
+.bigx25
+	font-size 2.5em
+.bigx3
+	font-size 3em
+.bigx4
+	font-size 4em
+.bigx5
+	font-size 5em
+
+.clear
+	float none!important
+	clear both!important
+	display block!important
+	overflow hidden!important
+	visibility hidden!important
+	width 0!important
+	height 0!important
+	margin 0!important
+	padding 0!important
+	border 0!important
+	outline 0!important
+
+.clear:before, .clear:after
+	content ''!important
+	content none!important
+
+.clearfix
+	*zoom 1
+.clearfix:before,
+.clearfix:after
+	display table
+	line-height 0
+	content ""
+.clearfix:after
+	float none!important
+	clear both!important
+	overflow hidden!important
+	visibility hidden!important
+	width 0!important
+	height 0!important
+	margin 0!important
+	padding 0!important
+	border 0!important
+	outline 0!important
+
+.vertical_helper
+	float none!important
+	clear both!important
+	display inline-block!important
+	overflow hidden!important
+	visibility hidden!important
+	width 0!important
+	height 100%!important
+	margin 0!important
+	padding 0!important
+	border 0!important
+	outline 0!important
+	vertical-align middle!important
+
+.vertical_middle
+	display inline-block
+	vertical-align middle
+.vertical_top
+	display inline-block
+	vertical-align top
+.vertical_bottom
+	display inline-block
+	vertical-align bottom
+
+.none
+	display none
+.block
+	display block
+.iblock
+	display inline-block
+.inline
+	display inline
+.hidden
+	visibility hidden
+.o_hidden
+	overflow hidden
+
+.relative
+	position relative
+.fixed
+	position fixed
+
+.text_right
+	text-align right
+.text_left
+	text-align left
+.text_center
+	text-align center
+
+.full_width
+	width 100%
+
+.bord_box, .bord_box:before, .bord_box:after
+	box-sizing border-box
+
+.no_decor, .no_decor:hover, a:hover .no_decor
+	text-decoration none
+.decor
+	text-decoration underline
+.no_hov_decor:hover, a:hover .no_hov_decor
+	text-decoration none
+.hov_decor, a .hov_decor, .hov_decor a
+	text-decoration none
+.hov_decor:hover, a:hover .hov_decor
+	text-decoration underline
+
+.upper
+	text-transform uppercase
+.lower
+	text-transform lowercase
+
+.line, p.line, b.line, i.line, span.line, a.line
+	line-height 1
+.line2, p.line2, b.line2, i.line2, span.line2, a.line2
+	line-height 1.2
+.line5, p.line5, b.line5, i.line5, span.line5, a.line5
+	line-height 1.5
+
+.pull_right
+	float right
+.pull_left
+	float left
+
+.nowrap
+	white-space nowrap
+
+.img_left
+	float left
+	margin .25em 1em 1em 0
+.img_right
+	float right
+	margin .25em 0 1em 1em
+
+.circle
+	border-radius 50%
+	overflow hidden
+
+.white, .hov_white:hover
+	color #fff
+.black, .hov_black:hover
+	color #000
+.bg_white
+	background-color #fff
+.bg_black
+	background-color #000
+
+@media (min-width:767px)
+	.none_desktop
+		display none
+	.block_desktop
+		display block
+	.iblock_desktop
+		display inline-block
+	.inline_desktop
+		display inline
+	.text_right_desktop
+		text-align right
+	.text_left_desktop
+		text-align left
+	.text_center_desktop
+		text-align center
+	.small_desktop
+		font-size 0.9em
+	.big_desktop
+		font-size 1.2em
+	.smaller_desktop
+		font-size 0.7em
+	.bigger_desktop
+		font-size 1.4em
+
+@media (max-width:767px)
+	.none_phone
+		display none
+	.block_phone
+		display block
+	.iblock_phone
+		display inline-block
+	.inline_phone
+		display inline
+	.text_right_phone
+		text-align right
+	.text_left_phone
+		text-align left
+	.text_center_phone
+		text-align center
+
+@media print
+	*
+		text-shadow none!important
+		color #000!important
+		background transparent!important
+		box-shadow none!important
+	a, a:visited
+		text-decoration underline
+	a[href]:after
+		content " (" attr(href) ")"
+		font-weight normal
+		font-style normal
+		text-decoration none!important
+		font-size .8em
+		word-wrap break-word
+	abbr[title]:after
+		content " (" attr(title) ")"
+	.ir a:after, a[href^="javascript:"]:after, a[href^="#"]:after
+		content ""
+	pre, blockquote
+		border 1px solid #999
+		page-break-inside avoid
+	thead
+		display table-header-group
+	tr, img
+		page-break-inside avoid
+	img
+		max-width 100%!important
+	@page
+		margin 0.5cm
+	p, h2, h3
+		orphans 3
+		widows 3
+	h2, h3
+		page-break-after avoid
