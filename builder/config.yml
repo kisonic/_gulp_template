@@ -29,7 +29,6 @@ built:
   styles:
     all: "../built/styles/*.css"
     path: "../built/styles"
-    main: "../built/*.css"
 
   scripts:
     all: "../built/scripts/**/*.js"

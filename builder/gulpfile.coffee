@@ -67,7 +67,7 @@ gulp.task 'stylus', ->
 			browsers: ['last 5 versions']
 			cascade: false
 		.pipe g.csscomb()
-		.pipe gulp.dest config.built.path
+		.pipe gulp.dest config.built.styles.path
 		.pipe do g.connect.reload
 
 # Копирование картинок из src в built
@@ -119,7 +119,7 @@ gulp.task 'images:min', ->
 		.pipe gulp.dest config.built.images.path
 
 gulp.task 'styles:min', ->
-	gulp.src config.built.styles.main
+	gulp.src config.built.styles.all
 		.pipe g.plumber
 			errorHandler: consoleErorr
 		.pipe g.minifyCss()
@@ -130,7 +130,7 @@ gulp.task 'styles:min', ->
 gulp.task 'watch', ->
 	gulp.watch config.src.scripts.local.all, ['coffee']
 	gulp.watch config.src.scripts.vendor.all, ['vendor']
-	gulp.watch [config.src.styles.all, config.src.styles.main], ['stylus']
+	gulp.watch config.src.styles.all, ['stylus']
 	gulp.watch config.src.images.all, ['images']
 	gulp.watch config.src.templates.all, ['jade']
 
