@@ -1,0 +1,17 @@
+/*
+ *  Theme Name: Redbrush
+ *  Theme URI: http://redbrush.ru
+ *  Author: Redbrush
+ *  Author URI: http://redbrush.ru
+ *  Description: Theme for Redbrush corporate site
+ *  Version: 1.0
+ *  License: GNU General Public License v2 or later
+ *  License URI: http://www.gnu.org/licenses/gpl-2.0.html
+ *  Tags: black, red, responsive-layout
+ *  Text Domain: Redbrush
+ */
+
+@import './styles/reset.css';
+@import './styles/grid.css';
+@import './scripts/vendor/fontawesome/css/font-awesome.min.css';
+@import './styles/main.css';

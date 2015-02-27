@@ -1,8 +1,4 @@
-columns = 12
-gutter = 15px
-width_narrow = 768px
-width_middle = 1000px
-width_wide = 1200px
+@require 'variables.styl'
 
 .container
 	box-sizing border-box
@@ -10,6 +6,7 @@ width_wide = 1200px
 	margin-left auto
 	padding-right gutter
 	padding-left gutter
+	max-width 1000px
 
 .row
 	margin-right - gutter
@@ -20,8 +17,8 @@ generate_grid_classes(columns, suffix)
 		position relative
 		box-sizing border-box
 		min-height 1px
-		padding-right 15px
-		padding-left 15px
+		padding-right gutter
+		padding-left gutter
 	for x in suffix
 		for y in columns..1
 			.col{x}_{y}
@@ -46,31 +43,41 @@ generate_grid_offset(columns, suffix)
 		.col{suffix}_offset_{x}
 			margin-left total+'%'
 
-generate_grid_classes(columns, '_xs' '_sm' '_md' '_lg')
+generate_grid_classes(columns, '_xxs' '_xs' '_sm' '_md' '_lg' '_landscape')
 
-generate_grid_float(columns, '_xs')
+generate_grid_float(columns, '_xxs')
 
-generate_grid(columns, '_xs')
+generate_grid(columns, '_xxs')
 
-generate_grid_offset(columns, '_xs')
+generate_grid_offset(columns, '_xxs')
 
-@media (min-width: width_narrow)
+@media (min-width: width_xs)
+	generate_grid_float(columns, '_xs')
+	generate_grid(columns, '_xs')
+	generate_grid_offset(columns, '_xs')
+
+@media (orientation : landscape)
+	generate_grid_float(columns, '_landscape')
+	generate_grid(columns, '_landscape')
+	generate_grid_offset(columns, '_landscape')
+
+@media (min-width: width_sm)
 	.container
-		width width_narrow
+		width width_sm
 	generate_grid_float(columns, '_sm')
 	generate_grid(columns, '_sm')
 	generate_grid_offset(columns, '_sm')
 
-@media (min-width: width_middle)
+@media (min-width: width_md)
 	.container
-		width width_middle
+		width width_md
 	generate_grid_float(columns, '_md')
 	generate_grid(columns, '_md')
 	generate_grid_offset(columns, '_md')
 
-@media (min-width: width_wide)
+@media (min-width: width_lg)
 	.container
-		width width_wide
+		width width_lg
 	generate_grid_float(columns, '_lg')
 	generate_grid(columns, '_lg')
 	generate_grid_offset(columns, '_lg')

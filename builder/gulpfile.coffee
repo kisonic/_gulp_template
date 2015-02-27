@@ -4,17 +4,69 @@
 
 # node modules
 fs = require 'fs'
-yaml = require 'js-yaml'
 pngcrush = require 'imagemin-pngcrush'
 
 # gulp modules
 gulp = require 'gulp'
-# connect = require 'gulp-connect'
 gulpLoadPlugins = require 'gulp-load-plugins'
 g = gulpLoadPlugins()
 
-# config.yml file
-config = yaml.load(fs.readFileSync("config.yml", "utf8"))
+
+##################################################################################
+##### Пути к файлам
+##################################################################################
+
+src =
+	path: "../src"
+
+	styles:
+		all: "../src/styles/*.styl"
+		path: "../src/styles"
+		main: "../src/style.css"
+
+	scripts:
+		local:
+			all: "../src/scripts/local/**/*.coffee"
+		vendor:
+			all: "../src/scripts/vendor/**/*.*"
+
+	images:
+		all: "../src/images/**/*.*"
+		path: "../src/images"
+
+	fonts:
+		all: "../src/fonts/**/*.*"
+		path: "../src/fonts"
+
+	templates:
+		all: "../src/*.jade"
+		path: "../src"
+
+built =
+	path: "../built"
+
+	styles:
+		all: "../built/styles/*.css"
+		path: "../built/styles"
+		main: "../built/style.css"
+
+	scripts:
+		all: "../built/scripts/**/*.js"
+		path: "../built/scripts"
+		local:
+			all: "../built/scripts/local/**/*.js"
+			path: "../built/scripts/local"
+		vendor:
+			all: "../built/scripts/vendor/**/*.js"
+			path: "../built/scripts/vendor"
+
+	images:
+		all: "../built/images/**/*.*"
+		path: "../built/images"
+
+	fonts:
+		all: "../built/fonts/**/*.*"
+		path: "../built/fonts"
 
 
 ##################################################################################
@@ -42,70 +94,78 @@ gulp.task 'connect', ->
 
 # Перенос скриптов из папки vendor в built
 gulp.task 'vendor', ->
-	gulp.src config.src.scripts.vendor.all
-		.pipe gulp.dest config.built.scripts.vendor.path
+	gulp.src src.scripts.vendor.all
+		.pipe gulp.dest built.scripts.vendor.path
+		.pipe do g.connect.reload
 
 # Компиляция coffee в js
 gulp.task 'coffee', ->
-	gulp.src config.src.scripts.local.all
+	gulp.src src.scripts.local.all
 		.pipe g.plumber
 			errorHandler: consoleErorr
 		.pipe g.coffee
-			bare: true
-		.pipe gulp.dest config.built.scripts.local.path
+			bare: false
+		.pipe gulp.dest built.scripts.local.path
 		.pipe do g.connect.reload
 
 gulp.task 'scripts', ['vendor', 'coffee']
 
 # Компиляция stylus в css и добавление префиксов
 gulp.task 'stylus', ->
-	gulp.src config.src.styles.all
+	gulp.src src.styles.all
 		.pipe g.plumber
 			errorHandler: consoleErorr
 		.pipe g.stylus()
 		.pipe g.autoprefixer
 			browsers: ['last 5 versions']
 			cascade: false
-		.pipe g.csscomb()
-		.pipe gulp.dest config.built.styles.path
+		.pipe gulp.dest built.styles.path
+
+gulp.task 'css', ->
+	gulp.src src.styles.main
+		.pipe gulp.dest built.path
 		.pipe do g.connect.reload
+
+gulp.task 'styles', ['stylus', 'css']
 
 # Копирование картинок из src в built
 gulp.task 'images', ->
-	gulp.src config.src.images.all
-		.pipe gulp.dest config.built.images.path
+	gulp.src src.images.all
+		.pipe gulp.dest built.images.path
+		.pipe do g.connect.reload
 
 # Копирование шрифтов из src в built
 gulp.task 'fonts', ->
-	gulp.src config.src.fonts.all
-		.pipe gulp.dest config.built.fonts.path
+	gulp.src src.fonts.all
+		.pipe gulp.dest built.fonts.path
+		.pipe do g.connect.reload
 
 # Генерирование jade шаблонов
 gulp.task 'jade', ->
-	gulp.src config.src.templates.all
+	gulp.src src.templates.all
 		.pipe g.plumber
 			errorHandler: consoleErorr
 		.pipe g.jade
 			pretty: true
-		.pipe gulp.dest config.built.path
+		.pipe gulp.dest built.path
 		.pipe do g.connect.reload
 
 
 ##################################################################################
-##### Такси оптимизации
+##### Таски оптимизации
 ##################################################################################
 
 # Оптимизация скриптов
 gulp.task 'scripts:min', ->
-	gulp.src config.built.scripts.local.all
+	gulp.src built.scripts.local.all
 		.pipe g.plumber
 			errorHandler: consoleErorr
 		.pipe g.uglify()
-		.pipe gulp.dest config.built.scripts.local.path
+		.pipe gulp.dest built.scripts.local.path
 
 # Оптимизация картинок
 gulp.task 'images:min', ->
-	gulp.src config.built.images.all
+	gulp.src built.images.all
 		.pipe g.plumber
 			errorHandler: consoleErorr
 		.pipe g.imagemin
@@ -116,24 +176,28 @@ gulp.task 'images:min', ->
 			use: [
 				pngcrush()
 			]
-		.pipe gulp.dest config.built.images.path
+		.pipe gulp.dest built.images.path
 
+# Оптимизация стилей
 gulp.task 'styles:min', ->
-	gulp.src config.built.styles.all
+	gulp.src built.styles.main
 		.pipe g.plumber
 			errorHandler: consoleErorr
 		.pipe g.minifyCss()
-		.pipe gulp.dest config.built.path
+		.pipe gulp.dest built.path
 
 
-# Отслеживанием изменение файлов
+##################################################################################
+##### Отслеживанием изменение файлов
+##################################################################################
+
 gulp.task 'watch', ->
-	gulp.watch config.src.scripts.local.all, ['coffee']
-	gulp.watch config.src.scripts.vendor.all, ['vendor']
-	gulp.watch config.src.styles.all, ['stylus']
-	gulp.watch config.src.images.all, ['images']
-	gulp.watch config.src.templates.all, ['jade']
-
+	gulp.watch src.scripts.local.all, ['coffee']
+	gulp.watch src.scripts.vendor.all, ['vendor']
+	gulp.watch src.styles.all, ['styles']
+	gulp.watch src.images.all, ['images']
+	gulp.watch src.fonts.all, ['fonts']
+	gulp.watch src.templates.all, ['jade']
 	return
 
 
@@ -142,13 +206,13 @@ gulp.task 'watch', ->
 ##################################################################################
 
 # Выполнение всех тасков
-gulp.task 'default', ['stylus', 'scripts', 'images', 'jade']
+gulp.task 'default', ['styles', 'scripts', 'images', 'fonts', 'jade']
 
 # Dev таск для разработки с отслеживанием измнений файлов и компиляцией их на лету
 gulp.task 'dev', ['default', 'connect', 'watch']
 
-# минификация js, css и оптимизация изображений.
-gulp.task 'minify', ['scripts:min', 'styles:min', 'images:min']
+# Минификация js, css и оптимизация изображений
+gulp.task 'minify', ['scripts:min', 'images:min', 'styles:min']
 
 # Подготовка проекта для продакшена. Исполнение всех задач + минификация файлов
 gulp.task 'prod', ['default'], ->

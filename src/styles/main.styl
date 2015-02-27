@@ -1,88 +1,55 @@
-color_main = #21242c
-color_main_light = #2c2f38
-color_main_dark = #191a22
-color_text = #fff
-color_text_dark = #747883
-color_second = #0fa5da
-gutter = 15px
-font_main = 'PT Sans Caption', Tahoma, Arial, Helvetica, sans-serif
-font_header = 'Ubuntu', Tahoma, Arial, Helvetica, sans-serif
-font_italic = Georgea, serif
+@require 'variables.styl'
+
+@font-face
+	font-family 'font_main'
+	src url('../fonts/your_font.eot')
+	src url('../fonts/your_font.eot?#iefix') format('embedded-opentype'),
+		url('../fonts/your_font.woff2') format('woff2'),
+		url('../fonts/your_font.woff') format('woff'),
+		url('../fonts/your_font.ttf') format('truetype'),
+		url('../fonts/your_font.svg#pf_dintext_proregular') format('svg')
+	font-weight normal
+	font-style normal
 
 body
 	font-size 0.875em
-	color #000
+	color color_text
 	font-family font_main
 
-h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6
+.main_wrap
+	margin 0 auto
+
+.h, h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6
 	text-transform uppercase
-	font-family font_header
 	font-weight bold
-	margin 1em 0 .5em
+	margin 0 0 .5em
 	line-height 1
 
+* + h1, * + .h1, * + h2, * + .h2, * + h3, * + .h3, * + h4, * + .h4, * + h5, * + .h5, * + h6, * + .h6
+	margin-top 1em
+
 h1, .h1
-	font-size 3em
-	letter-spacing -1px
+	font-size h1
 h2, .h2
-	font-size 2.6em
+	font-size h2
 h3, .h3
-	font-size 2.2em
+	font-size h3
 h4, .h4
-	font-size 1.8em
+	font-size h4
 h5, .h5
-	font-size 1.4em
+	font-size h5
 h6, .h6
 	font-weight normal
 
-.center_header
-	position relative
-	text-align center
-	margin 2em 0 1em
-	z-index 1
-	span
-		background-color color_main
-		padding 0 .5em
-	&:after
-		content ''
-		position absolute
-		border 0
-		top 0
-		bottom 0
-		left 0
-		margin auto
-		height 6px
-		width 100%
-		background-color alpha(color_text, 0.05)
-		z-index -1
-
 a
-	color color_second
+	color color_text
 	text-decoration underline
 	&:hover
-		color lightness(color_second, 60%)
+		color color_text
 
 p
 	line-height 1.5
 	margin-bottom .5em
-.lead
-	margin 1em 0
-.lead_s
-	margin .5em 0
-
-em, i, dfn
-	font-family font_italic
-	font-weight bold
-
-html
-	background-color color_main_dark
-
-body
-	background-color color_main
-	color color_text
-
-.main_wrap
-	margin 0 auto
 
 .main_wrap input[type='text'],
 .main_wrap input[type='date'],
@@ -110,12 +77,6 @@ body
 	display inline-block
 	box-sizing border-box
 	max-width 100%
-	margin-bottom gutter*2
-	padding 1em
-	border none
-	border-radius .3em
-	outline none
-	box-shadow none
 
 .main_wrap input[type='text'],
 .main_wrap input[type='date'],
@@ -132,8 +93,7 @@ body
 .main_wrap input[type='number'],
 .main_wrap textarea,
 .main_wrap select
-	color color_text_dark
-	background-color color_main_light
+	border 0
 
 .main_wrap textarea
 	border-bottom-right-radius 0
@@ -163,141 +123,9 @@ body
 .main_wrap input[type='submit'],
 .main_wrap button,
 .main_wrap .button
-	color color_text
-	background-color color_second
-
-.main_header
-	position fixed
-	top 0
-	width 100%
-	z-index 100
-	background-color color_main_dark
-
-.main_menu
-	ul
-		float right
-	li
-		display block
-		float left
-		padding-left 2em
-		&:first-child
-			padding-left 0
-		a
-			font-family font_header
-			font-weight bold
-			color color_text
-			display inline-block
-			padding 1em 0 .7em
-			border-bottom .3em solid transparent
-			text-transform uppercase
-			text-decoration none
-			&:hover
-				color lightness(color_second, 60%)
-			&.current
-				border-bottom-color color_text
-				&:hover
-					border-bottom-color color_second
-
-.logo
-	padding-top 1em
-
-.fullscreen_slide_content
-	position absolute
-	bottom 0
-	left 0
-	right 0
-	margin 0 auto
-	width 400px
-	text-align center
-	padding-bottom 2em
-
-.person
-	position relative
-	text-align center
-	overflow hidden
-	word-wrap break-word
-	margin-bottom gutter * 2
-.person_content
-	position relative
-	left 0%
-	transition left .3s ease
-.show_person_more_info .person_content
-	left 100%
-.person_info
-	background-color color_main_light
-.person_info_img
-	display block
-	text-decoration none
-	img
-		display block
-		width 100%
-.person_info_content
-	padding 2em 1em 1em
-	min-height 12.5em
-	box-sizing border-box
-.person_more_info
-	position absolute
-	top 0
-	right 100%
-	width 100%
-	height 100%
-	padding 2em 1em
-	box-sizing border-box
-	background-color color_second
-
-.main_footer
-
-.fullscreen_slider img
-	max-width none
-	max-height none
-
-.color_main
-	color color_main
-.color_main_light
-	color color_main_light
-.color_main_dark
-	color color_main_dark
-.color_text
-	color color_text
-.color_text_dark
-	color color_text_dark
-.color_second
-	color color_second
-
-.bg_color_main
-	background-color color_main
-.bg_color_main_light
-	background-color color_main_light
-.bg_color_main_dark
-	background-color color_main_dark
-.bg_color_text
-	background-color color_text
-.bg_color_text_dark
-	background-color color_text_dark
-.bg_color_second
-	background-color color_second
-
-hr
 	border 0
-	margin 2em auto
-	height 1px
-	width 100%
-	background-color color_text
-.hr_dark
-	background-color color_text_dark
-.hr_xs
-	margin 1em auto
-	width 4em
-.hr_s
-	width 6em
-.hr_l
-	height 2px
-.hr_xl
-	margin 3em auto
-	height 4px
-.hr_xxl
-	margin 4em auto
-	height 6px
+
+
 
 .xxxxsmall
 	font-size 0.5em
@@ -472,7 +300,7 @@ hr
 .bg_black
 	background-color #000
 
-@media (min-width:767px)
+@media (min-width: width_sm)
 	.none_desktop
 		display none
 	.block_desktop
@@ -496,7 +324,7 @@ hr
 	.bigger_desktop
 		font-size 1.4em
 
-@media (max-width:767px)
+@media (max-width: width_sm)
 	.none_phone
 		display none
 	.block_phone

@@ -17,8 +17,5 @@
     "tests"
   ],
   "dependencies": {
-    "jquery": "~1.11.0",
-    "fontawesome": "latest",
-    "flexslider": "latest"
   }
 }
