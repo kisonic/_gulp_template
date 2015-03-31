@@ -43,30 +43,30 @@ src =
 		path: "../src"
 
 built =
-	path: "../built"
+	path: "../"
 
 	styles:
-		all: "../built/styles/*.css"
-		path: "../built/styles"
-		main: "../built/style.css"
+		all: "../styles/*.css"
+		path: "../styles"
+		main: "../style.css"
 
 	scripts:
-		all: "../built/scripts/**/*.js"
-		path: "../built/scripts"
+		all: "../scripts/**/*.js"
+		path: "../scripts"
 		local:
-			all: "../built/scripts/local/**/*.js"
-			path: "../built/scripts/local"
+			all: "../scripts/local/**/*.js"
+			path: "../scripts/local"
 		vendor:
-			all: "../built/scripts/vendor/**/*.js"
-			path: "../built/scripts/vendor"
+			all: "../scripts/vendor/**/*.js"
+			path: "../scripts/vendor"
 
 	images:
-		all: "../built/images/**/*.*"
-		path: "../built/images"
+		all: "../images/**/*.*"
+		path: "../images"
 
 	fonts:
-		all: "../built/fonts/**/*.*"
-		path: "../built/fonts"
+		all: "../fonts/**/*.*"
+		path: "../fonts"
 
 
 ##################################################################################
@@ -146,7 +146,7 @@ gulp.task 'jade', ->
 		.pipe g.plumber
 			errorHandler: consoleErorr
 		.pipe g.jade
-			pretty: true
+			pretty: '\t'
 		.pipe gulp.dest built.path
 		.pipe do g.connect.reload
 
@@ -183,7 +183,9 @@ gulp.task 'styles:min', ->
 	gulp.src built.styles.main
 		.pipe g.plumber
 			errorHandler: consoleErorr
-		.pipe g.minifyCss()
+		.pipe g.minifyCss
+			keepBreaks: true
+			advanced: false
 		.pipe gulp.dest built.path
 
 
