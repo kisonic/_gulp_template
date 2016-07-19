@@ -22,13 +22,16 @@ src =
 	styles:
 		all: "../src/styles/*.styl"
 		path: "../src/styles"
-		main: "../src/style.css"
+		main: "../src/styles/main.styl"
 
 	scripts:
 		local:
 			all: "../src/scripts/local/**/*.coffee"
 		vendor:
 			all: "../src/scripts/vendor/**/*.*"
+			deps: [
+				# "jquery/dist/jquery.min.js"
+			]
 
 	images:
 		all: "../src/images/**/*.*"
@@ -43,30 +46,30 @@ src =
 		path: "../src"
 
 built =
-	path: "../"
+	path: "../built"
 
 	styles:
-		all: "../styles/*.css"
-		path: "../styles"
-		main: "../style.css"
+		all: "../built/styles/*.css"
+		path: "../built/styles"
+		main: "../built/styles/main.css"
 
 	scripts:
-		all: "../scripts/**/*.js"
-		path: "../scripts"
+		all: "../built/scripts/**/*.*"
+		path: "../built/scripts"
 		local:
-			all: "../scripts/local/**/*.js"
-			path: "../scripts/local"
+			all: "../built/scripts/local/**/*.*"
+			path: "../built/scripts/local"
 		vendor:
-			all: "../scripts/vendor/**/*.js"
-			path: "../scripts/vendor"
+			all: "../built/scripts/vendor/**/*.*"
+			path: "../built/scripts/vendor"
 
 	images:
-		all: "../images/**/*.*"
-		path: "../images"
+		all: "../built/images/**/*.*"
+		path: "../built/images"
 
 	fonts:
-		all: "../fonts/**/*.*"
-		path: "../fonts"
+		all: "../built/fonts/**/*.*"
+		path: "../built/fonts"
 
 
 ##################################################################################
@@ -95,6 +98,7 @@ gulp.task 'connect', ->
 # Перенос скриптов из папки vendor в built
 gulp.task 'vendor', ->
 	gulp.src src.scripts.vendor.all
+		.pipe g.ignore.include(src.scripts.vendor.deps)
 		.pipe gulp.dest built.scripts.vendor.path
 		.pipe do g.connect.reload
 
@@ -105,38 +109,48 @@ gulp.task 'coffee', ->
 			errorHandler: consoleErorr
 		.pipe g.coffee
 			bare: false
+		.pipe g.uglify()
 		.pipe gulp.dest built.scripts.local.path
 		.pipe do g.connect.reload
 
 gulp.task 'scripts', ['vendor', 'coffee']
 
 # Компиляция stylus в css и добавление префиксов
-gulp.task 'stylus', ->
-	gulp.src src.styles.all
+gulp.task 'styles', ->
+	gulp.src src.styles.main
 		.pipe g.plumber
 			errorHandler: consoleErorr
 		.pipe g.stylus()
 		.pipe g.autoprefixer
-			browsers: ['last 5 versions']
+			browsers: ['last 7 versions']
 			cascade: false
-		.pipe gulp.dest built.styles.path
-
-gulp.task 'css', ->
-	gulp.src src.styles.main
+		.pipe g.minifyCss
+			advanced: false
+			keepBreaks: false
 		.pipe gulp.dest built.path
 		.pipe do g.connect.reload
-
-gulp.task 'styles', ['stylus', 'css']
 
 # Копирование картинок из src в built
 gulp.task 'images', ->
 	gulp.src src.images.all
+		.pipe g.plumber
+			errorHandler: consoleErorr
+		.pipe g.imagemin
+			progressive: true
+			svgoPlugins: [
+				removeViewBox: false
+			]
+			use: [
+				pngcrush()
+			]
 		.pipe gulp.dest built.images.path
 		.pipe do g.connect.reload
 
 # Копирование шрифтов из src в built
 gulp.task 'fonts', ->
 	gulp.src src.fonts.all
+		.pipe g.plumber
+			errorHandler: consoleErorr
 		.pipe gulp.dest built.fonts.path
 		.pipe do g.connect.reload
 
@@ -156,37 +170,37 @@ gulp.task 'jade', ->
 ##################################################################################
 
 # Оптимизация скриптов
-gulp.task 'scripts:min', ->
-	gulp.src built.scripts.local.all
-		.pipe g.plumber
-			errorHandler: consoleErorr
-		.pipe g.uglify()
-		.pipe gulp.dest built.scripts.local.path
+# gulp.task 'scripts:min', ->
+# 	gulp.src built.scripts.local.all
+# 		.pipe g.plumber
+# 			errorHandler: consoleErorr
+# 		.pipe g.uglify()
+# 		.pipe gulp.dest built.scripts.local.path
 
 # Оптимизация картинок
-gulp.task 'images:min', ->
-	gulp.src built.images.all
-		.pipe g.plumber
-			errorHandler: consoleErorr
-		.pipe g.imagemin
-			progressive: true
-			svgoPlugins: [
-				removeViewBox: false
-			]
-			use: [
-				pngcrush()
-			]
-		.pipe gulp.dest built.images.path
+# gulp.task 'images:min', ->
+# 	gulp.src built.images.all
+# 		.pipe g.plumber
+# 			errorHandler: consoleErorr
+# 		.pipe g.imagemin
+# 			progressive: true
+# 			svgoPlugins: [
+# 				removeViewBox: false
+# 			]
+# 			use: [
+# 				pngcrush()
+# 			]
+# 		.pipe gulp.dest built.images.path
 
 # Оптимизация стилей
-gulp.task 'styles:min', ->
-	gulp.src built.styles.main
-		.pipe g.plumber
-			errorHandler: consoleErorr
-		.pipe g.minifyCss
-			keepBreaks: true
-			advanced: false
-		.pipe gulp.dest built.path
+# gulp.task 'styles:min', ->
+# 	gulp.src built.styles.main
+# 		.pipe g.plumber
+# 			errorHandler: consoleErorr
+# 		.pipe g.minifyCss
+# 			advanced: false
+# 			keepBreaks: false
+# 		.pipe gulp.dest built.path
 
 
 ##################################################################################
@@ -208,14 +222,14 @@ gulp.task 'watch', ->
 ##################################################################################
 
 # Выполнение всех тасков
-gulp.task 'default', ['styles', 'scripts', 'images', 'fonts', 'jade']
+gulp.task 'dev', ['styles', 'scripts', 'images', 'fonts', 'jade']
 
 # Dev таск для разработки с отслеживанием измнений файлов и компиляцией их на лету
-gulp.task 'dev', ['default', 'connect', 'watch']
+gulp.task 'default', ['dev', 'connect', 'watch']
 
 # Минификация js, css и оптимизация изображений
-gulp.task 'minify', ['scripts:min', 'images:min', 'styles:min']
+# gulp.task 'minify', ['scripts:min', 'images:min', 'styles:min']
 
 # Подготовка проекта для продакшена. Исполнение всех задач + минификация файлов
-gulp.task 'prod', ['default'], ->
-	gulp.start 'minify'
+# gulp.task 'prod', ['dev'], ->
+# 	gulp.start 'minify'

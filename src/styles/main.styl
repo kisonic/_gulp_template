@@ -1,4 +1,6 @@
-@require 'variables.styl'
+@require 'variables'
+@require 'normalize'
+@require 'grid'
 
 @font-face
 	font-family 'font_main'
@@ -7,70 +9,88 @@
 		url('../fonts/your_font.woff2') format('woff2'),
 		url('../fonts/your_font.woff') format('woff'),
 		url('../fonts/your_font.ttf') format('truetype'),
-		url('../fonts/your_font.svg#pf_dintext_proregular') format('svg')
+		url('../fonts/your_font.svg#your_font') format('svg')
 	font-weight normal
 	font-style normal
 
+@-ms-viewport
+	width device-width
+
+*
+	box-sizing border-box
+*:before,
+*:after
+	box-sizing border-box
+
 body
-	font-size 0.875em
-	color color_text
+	-webkit-font-smoothing antialiased
+	-moz-osx-font-smoothing grayscale
+	-webkit-tap-highlight-color rgba(0, 0, 0, 0)
+	min-width screen_xxs
+	font_size(14,16)
 	font-family font_main
+	color color_text
+	line-height 1.5
 
-.main_wrap
-	margin 0 auto
+img
+iframe
+figure
+embed
+	max-width 100%
+img
+	height auto
+figure
+	margin 0
 
-.h, h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6
+h1, h2, h3, h4, h5, h6
 	text-transform uppercase
 	font-weight bold
-	margin 0 0 .5em
+	margin 1em 0 .5em
 	line-height 1
+	&:first-child
+		margin-top 0
 
-* + h1, * + .h1, * + h2, * + .h2, * + h3, * + .h3, * + h4, * + .h4, * + h5, * + .h5, * + h6, * + .h6
-	margin-top 1em
-
-h1, .h1
-	font-size h1
-h2, .h2
-	font-size h2
-h3, .h3
-	font-size h3
-h4, .h4
-	font-size h4
-h5, .h5
-	font-size h5
-h6, .h6
-	font-weight normal
+h1
+	font_size(h1)
+h2
+	font_size(h2)
+h3
+	font_size(h3)
+h4
+	font_size(h4)
+h5
+	font_size(h5)
+h6
+	font_size(h6)
 
 a
 	color color_text
-	text-decoration underline
 	&:hover
-		color color_text
+		color color_accent
 
 p
-	line-height 1.5
 	margin-bottom .5em
 
-.main_wrap input[type='text'],
-.main_wrap input[type='date'],
-.main_wrap input[type='datetime'],
-.main_wrap input[type='datetime-local'],
-.main_wrap input[type='time'],
-.main_wrap input[type='month'],
-.main_wrap input[type='week'],
-.main_wrap input[type='password'],
-.main_wrap input[type='search'],
-.main_wrap input[type='email'],
-.main_wrap input[type='url'],
-.main_wrap input[type='tel'],
-.main_wrap input[type='number'],
-.main_wrap textarea,
-.main_wrap select,
-.main_wrap input[type='button'],
-.main_wrap input[type='reset'],
-.main_wrap input[type='submit'],
-.main_wrap button,
-.main_wrap .button
+input[type='text'],
+input[type='date'],
+input[type='datetime'],
+input[type='datetime-local'],
+input[type='time'],
+input[type='month'],
+input[type='week'],
+input[type='password'],
+input[type='search'],
+input[type='email'],
+input[type='url'],
+input[type='tel'],
+input[type='number'],
+textarea,
+select,
+input[type='button'],
+input[type='reset'],
+input[type='submit'],
+button,
+.button
 	-webkit-font-smoothing antialiased
 	-moz-osx-font-smoothing grayscale
 	font inherit
@@ -78,135 +98,100 @@ p
 	box-sizing border-box
 	max-width 100%
 
-.main_wrap input[type='text'],
-.main_wrap input[type='date'],
-.main_wrap input[type='datetime'],
-.main_wrap input[type='datetime-local'],
-.main_wrap input[type='time'],
-.main_wrap input[type='month'],
-.main_wrap input[type='week'],
-.main_wrap input[type='password'],
-.main_wrap input[type='search'],
-.main_wrap input[type='email'],
-.main_wrap input[type='url'],
-.main_wrap input[type='tel'],
-.main_wrap input[type='number'],
-.main_wrap textarea,
-.main_wrap select
+input[type='text'],
+input[type='date'],
+input[type='datetime'],
+input[type='datetime-local'],
+input[type='time'],
+input[type='month'],
+input[type='week'],
+input[type='password'],
+input[type='search'],
+input[type='email'],
+input[type='url'],
+input[type='tel'],
+input[type='number'],
+textarea,
+select
 	border 0
 
-.main_wrap textarea
+textarea
 	border-bottom-right-radius 0
 
-.main_wrap input[type='date'],
-.main_wrap input[type='datetime'],
-.main_wrap input[type='datetime-local'],
-.main_wrap input[type='time'],
-.main_wrap input[type='month'],
-.main_wrap input[type='week'],
-.main_wrap input[type='number']
+input[type='date'],
+input[type='datetime'],
+input[type='datetime-local'],
+input[type='time'],
+input[type='month'],
+input[type='week'],
+input[type='number']
 	padding-right 0
 
-.main_wrap select
+select
 	-webkit-appearance none
 	-moz-appearance none
 
-.main_wrap button::-moz-focus-inner,
-.main_wrap input[type="reset"]::-moz-focus-inner,
-.main_wrap input[type="button"]::-moz-focus-inner,
-.main_wrap input[type="submit"]::-moz-focus-inner
+button::-moz-focus-inner,
+input[type="reset"]::-moz-focus-inner,
+input[type="button"]::-moz-focus-inner,
+input[type="submit"]::-moz-focus-inner
 	border none
 	padding 0
 
-.main_wrap input[type='button'],
-.main_wrap input[type='reset'],
-.main_wrap input[type='submit'],
-.main_wrap button,
-.main_wrap .button
+input[type='button'],
+input[type='reset'],
+input[type='submit'],
+button,
+.button
 	border 0
 
 
+.main_wrap
+	margin 0 auto
 
-.xxxxsmall
-	font-size 0.5em
-.xxxsmall
-	font-size 0.6em
-.xxsmall
-	font-size 0.7em
-.xsmall
-	font-size 0.8em
-.small
-	font-size 0.9em
-.big
-	font-size 1.1em
-.xbig
-	font-size 1.2em
-.xxbig
-	font-size 1.3em
-.xxxbig
-	font-size 1.4em
-.xxxxbig
-	font-size 1.5em
-.bigx2
-	font-size 2em
-.bigx25
-	font-size 2.5em
-.bigx3
-	font-size 3em
-.bigx4
-	font-size 4em
-.bigx5
-	font-size 5em
+
+.font_xs
+	font_size(10)
+.font_sm
+	font_size(12)
+.font_lg
+	font_size(16)
+.font_xl
+	font_size(18)
 
 .clear
-	float none!important
-	clear both!important
-	display block!important
-	overflow hidden!important
-	visibility hidden!important
-	width 0!important
-	height 0!important
-	margin 0!important
-	padding 0!important
-	border 0!important
-	outline 0!important
+	float none !important
+	clear both !important
+	display block !important
+	overflow hidden !important
+	visibility hidden !important
+	width 0 !important
+	height 0 !important
+	margin 0 !important
+	padding 0 !important
+	border 0 !important
+	outline 0 !important
 
 .clear:before, .clear:after
-	content ''!important
-	content none!important
+	content '' !important
+	content none !important
 
 .clearfix
-	*zoom 1
-.clearfix:before,
-.clearfix:after
-	display table
-	line-height 0
-	content ""
-.clearfix:after
-	float none!important
-	clear both!important
-	overflow hidden!important
-	visibility hidden!important
-	width 0!important
-	height 0!important
-	margin 0!important
-	padding 0!important
-	border 0!important
-	outline 0!important
+	clearfix()
 
 .vertical_helper
-	float none!important
-	clear both!important
-	display inline-block!important
-	overflow hidden!important
-	visibility hidden!important
-	width 0!important
-	height 100%!important
-	margin 0!important
-	padding 0!important
-	border 0!important
-	outline 0!important
-	vertical-align middle!important
+	float none !important
+	clear both !important
+	display inline-block !important
+	overflow hidden !important
+	visibility hidden !important
+	width 0 !important
+	height 100% !important
+	margin 0 !important
+	padding 0 !important
+	border 0 !important
+	outline 0 !important
+	vertical-align middle !important
 
 .vertical_middle
 	display inline-block
@@ -218,24 +203,6 @@ p
 	display inline-block
 	vertical-align bottom
 
-.none
-	display none
-.block
-	display block
-.iblock
-	display inline-block
-.inline
-	display inline
-.hidden
-	visibility hidden
-.o_hidden
-	overflow hidden
-
-.relative
-	position relative
-.fixed
-	position fixed
-
 .text_right
 	text-align right
 .text_left
@@ -246,132 +213,86 @@ p
 .full_width
 	width 100%
 
-.bord_box, .bord_box:before, .bord_box:after
-	box-sizing border-box
 
-.no_decor, .no_decor:hover, a:hover .no_decor
-	text-decoration none
-.decor
-	text-decoration underline
-.no_hov_decor:hover, a:hover .no_hov_decor
-	text-decoration none
-.hov_decor, a .hov_decor, .hov_decor a
-	text-decoration none
-.hov_decor:hover, a:hover .hov_decor
-	text-decoration underline
-
-.upper
-	text-transform uppercase
-.lower
-	text-transform lowercase
-
-.line, p.line, b.line, i.line, span.line, a.line
-	line-height 1
-.line2, p.line2, b.line2, i.line2, span.line2, a.line2
-	line-height 1.2
-.line5, p.line5, b.line5, i.line5, span.line5, a.line5
-	line-height 1.5
-
-.pull_right
-	float right
-.pull_left
-	float left
-
-.nowrap
-	white-space nowrap
-
-.img_left
-	float left
-	margin .25em 1em 1em 0
-.img_right
-	float right
-	margin .25em 0 1em 1em
-
-.circle
-	border-radius 50%
-	overflow hidden
-
-.white, .hov_white:hover
-	color #fff
-.black, .hov_black:hover
-	color #000
-.bg_white
-	background-color #fff
-.bg_black
-	background-color #000
-
-@media (min-width: width_sm)
-	.none_desktop
-		display none
-	.block_desktop
-		display block
-	.iblock_desktop
-		display inline-block
-	.inline_desktop
-		display inline
-	.text_right_desktop
-		text-align right
-	.text_left_desktop
-		text-align left
-	.text_center_desktop
-		text-align center
-	.small_desktop
-		font-size 0.9em
-	.big_desktop
-		font-size 1.2em
-	.smaller_desktop
-		font-size 0.7em
-	.bigger_desktop
-		font-size 1.4em
-
-@media (max-width: width_sm)
-	.none_phone
-		display none
-	.block_phone
-		display block
-	.iblock_phone
-		display inline-block
-	.inline_phone
-		display inline
-	.text_right_phone
-		text-align right
-	.text_left_phone
-		text-align left
-	.text_center_phone
-		text-align center
+// Print utilities
 
 @media print
-	*
-		text-shadow none!important
-		color #000!important
-		background transparent!important
-		box-shadow none!important
-	a, a:visited
+	*,
+	*:before,
+	*:after
+		background transparent !important
+		color #000 !important // Black prints faster h5bp.com/s
+		box-shadow none !important
+		text-shadow none !important
+
+	a,
+	a:visited
 		text-decoration underline
+
 	a[href]:after
 		content " (" attr(href) ")"
-		font-weight normal
-		font-style normal
-		text-decoration none!important
-		font-size .8em
-		word-wrap break-word
+
 	abbr[title]:after
 		content " (" attr(title) ")"
-	.ir a:after, a[href^="javascript:"]:after, a[href^="#"]:after
+
+	// Don't show links that are fragment identifiers,
+	// or use the `javascript:` pseudo protocol
+	a[href^="#"]:after,
+	a[href^="javascript:"]:after
 		content ""
-	pre, blockquote
+
+	pre,
+	blockquote
 		border 1px solid #999
 		page-break-inside avoid
+
 	thead
-		display table-header-group
-	tr, img
-		page-break-inside avoid
+		display table-header-group // h5bp.com/t
+
+	tr,
 	img
-		max-width 100%!important
-	@page
-		margin 0.5cm
-	p, h2, h3
+		page-break-inside avoid
+
+	img
+		max-width 100% !important
+
+	p,
+	h2,
+	h3
 		orphans 3
 		widows 3
-	h2, h3
+
+	h2,
+	h3
 		page-break-after avoid
+
+	// Bootstrap specific changes start
+	//
+	// Chrome (OSX) fix for https://github.com/twbs/bootstrap/issues/11245
+	// Once fixed, we can just straight up remove this.
+	select
+		background #fff !important
+
+	// Bootstrap components
+	.navbar
+		display none
+
+	.btn,
+	.dropup > .btn
+		> .caret
+			border-top-color #000 !important
+
+	.label
+		border 1px solid #000
+
+	.table
+		border-collapse collapse !important
+
+		td,
+		th
+			background-color #fff !important
+
+	.table-bordered
+		th,
+		td
+			border 1px solid #ddd !important

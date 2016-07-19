@@ -1,7 +1,7 @@
 {
-  "name": "bitrix",
+  "name": "html_template",
   "version": "1.0.0",
-  "description": "bitrix template",
+  "description": "html template",
   "main": "gulpfile.js",
   "dependencies": {},
   "devDependencies": {
@@ -9,6 +9,7 @@
     "gulp-autoprefixer": "latest",
     "gulp-coffee": "latest",
     "gulp-connect": "latest",
+    "gulp-ignore": "latest",
     "gulp-imagemin": "latest",
     "gulp-jade": "latest",
     "gulp-load-plugins": "latest",

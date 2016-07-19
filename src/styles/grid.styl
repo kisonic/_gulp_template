@@ -1,28 +1,47 @@
-@require 'variables.styl'
+.container
+.row
+	clearfix()
 
 .container
-	box-sizing border-box
 	margin-right auto
 	margin-left auto
 	padding-right gutter
 	padding-left gutter
-	max-width 1000px
+	max-width 100%
+	.container
+		width 100% !important
 
 .row
 	margin-right - gutter
 	margin-left - gutter
+	&.__inline
+		font-size 0
+		text(left)
+		&:before
+		&:after
+			display none
 
 generate_grid_classes(columns, suffix)
-	$column_{columns}
-		position relative
-		box-sizing border-box
-		min-height 1px
+	$column
+		width 100%
 		padding-right gutter
 		padding-left gutter
+	$inline_column
+		vertical-align middle
+		display inline-block
+		float none
+		font-size medium
+		font-size initial
+	$inline_column_child
+		font_size(14,16)
 	for x in suffix
 		for y in columns..1
 			.col{x}_{y}
-				@extend $column_{columns}
+				@extend $column
+			.col{x}_{y}.__inline
+				@extend $inline_column
+			.col{x}_{y}.__inline > div
+				@extend $inline_column_child
 
 generate_grid_float(columns, suffix)
 	$float_{suffix}_{columns}
@@ -43,52 +62,36 @@ generate_grid_offset(columns, suffix)
 		.col{suffix}_offset_{x}
 			margin-left total+'%'
 
-generate_grid_classes(columns, '_xxs' '_xs' '_sm' '_md' '_lg' '_landscape')
+generate_grid_classes(columns, '_xs' '_sm' '_md' '_lg' '_xl')
 
-generate_grid_float(columns, '_xxs')
+generate_grid_float(columns, '_xs')
+generate_grid(columns, '_xs')
+generate_grid_offset(columns, '_xs')
 
-generate_grid(columns, '_xxs')
-
-generate_grid_offset(columns, '_xxs')
-
-@media (min-width: width_xs)
-	generate_grid_float(columns, '_xs')
-	generate_grid(columns, '_xs')
-	generate_grid_offset(columns, '_xs')
-
-@media (orientation : landscape)
-	generate_grid_float(columns, '_landscape')
-	generate_grid(columns, '_landscape')
-	generate_grid_offset(columns, '_landscape')
-
-@media (min-width: width_sm)
+@media (min-width screen_sm_min)
 	.container
-		width width_sm
+		width screen_sm_min - gutter*2
 	generate_grid_float(columns, '_sm')
 	generate_grid(columns, '_sm')
 	generate_grid_offset(columns, '_sm')
 
-@media (min-width: width_md)
+@media (min-width screen_md_min)
 	.container
-		width width_md
+		width screen_md_min - gutter*2
 	generate_grid_float(columns, '_md')
 	generate_grid(columns, '_md')
 	generate_grid_offset(columns, '_md')
 
-@media (min-width: width_lg)
+@media (min-width: screen_lg_min)
 	.container
-		width width_lg
+		width screen_lg_min - gutter*2
 	generate_grid_float(columns, '_lg')
 	generate_grid(columns, '_lg')
 	generate_grid_offset(columns, '_lg')
 
-.container:before,
-.container:after,
-.row:before,
-.row:after
-	content " "
-	display table
-
-.container:after,
-.row:after
-	clear both
+@media (min-width: screen_xl_min)
+	.container
+		width screen_xl_min - gutter*2
+	generate_grid_float(columns, '_xl')
+	generate_grid(columns, '_xl')
+	generate_grid_offset(columns, '_xl')

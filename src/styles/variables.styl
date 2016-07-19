@@ -1,19 +1,81 @@
 columns = 12
-gutter = 7px
+gutter = 15px
 
-width_xs = 480px
-width_sm = 768px
-width_md = 1000px
-width_lg = 1200px
+screen_xs = 480px
+screen_xs_min = screen_xs
 
-color_main = #fff
-color_second = #fff
-color_text = #fff
+screen_sm = 768px
+screen_sm_min = screen_sm
 
-font_main = Tahoma, Arial, Helvetica, sans-serif
+screen_md = 992px
+screen_md_min = screen_md
 
-h1 = 3.5em
-h2 = 2.5em
-h3 = 1.6em
-h4 = 1.4em
-h5 = 1.2em
+screen_lg = 1200px
+screen_lg_min = screen_lg
+
+screen_xl = 1401px
+screen_xl_min = screen_xl
+
+screen_xs_max = (screen_sm_min - 1)
+screen_sm_max = (screen_md_min - 1)
+screen_md_max = (screen_lg_min - 1)
+screen_lg_max = (screen_xl_min - 1)
+
+
+color_main               = #000
+color_accent             = #265cdc
+color_text_light         = #aaaaaa
+color_text               = #7f8c8d
+color_text_dark          = #1b1b1b
+color_bg_light           = #f7f7f7
+color_bg                 = #797b7d
+color_bg_dark            = #26272d
+
+color_success            = #74b027
+color_error              = #d91616
+color_notice             = #2767b0
+
+
+z_hidden = -1
+z_base   = 1
+z_hover  = 10
+z_fixed  = 20
+z_popup  = 30
+
+
+time = .4s
+
+
+font_main   = Tahoma, Arial, Helvetica, sans-serif
+font_header = Tahoma, Arial, Helvetica, sans-serif
+
+font_size(px = 14, base = 14, i = null)
+	font-size (px/base)em i
+
+font_awesome()
+	font-family FontAwesome
+	text-rendering auto
+	-webkit-font-smoothing antialiased
+	-moz-osx-font-smoothing grayscale
+
+h1 = 72
+h2 = 48
+h3 = 36
+h4 = 30
+h5 = 24
+h6 = 18
+
+
+reset_ul()
+	padding 0
+	margin 0
+	list-style none
+
+
+clearfix()
+	&:before
+	&:after
+		content " "
+		display table
+	&:after
+		clear both
